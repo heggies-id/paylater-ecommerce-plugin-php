@@ -32,15 +32,15 @@ build_plugin() {
   if [ -d $TARGET_DIR/upload ]; then
     cp -Lr $TARGET_DIR/plugin/* $TARGET_DIR/upload
     echo "apakah masuk if pertama"
+  fi
 
-    # Release(WooCommerce): move contents of indodana-payment
-    # directly under plugin dir before zipped
-    if [ -z "${PLUGIN_NAME##woocommerce*}" ]; then
-      echo "apakah masuk if kedua"
-      mkdir $TARGET_DIR/temp
-      cp -Lr $TARGET_DIR/plugin/wp-content/plugins/indodana-payment/* $TARGET_DIR/temp
-      rm -rf $TARGET_DIR/plugin
-      mv $TARGET_DIR/temp $TARGET_DIR/plugin
-    fi
+  # Release(WooCommerce): move contents of indodana-payment
+  # directly under plugin dir before zipped
+  if [ -z "${PLUGIN_NAME##woocommerce*}" ]; then
+    echo "apakah masuk if kedua"
+    mkdir $TARGET_DIR/temp
+    cp -Lr $TARGET_DIR/plugin/wp-content/plugins/indodana-payment/* $TARGET_DIR/temp
+    rm -rf $TARGET_DIR/plugin
+    mv $TARGET_DIR/temp $TARGET_DIR/plugin
   fi
 }
