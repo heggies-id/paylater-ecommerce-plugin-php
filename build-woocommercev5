@@ -5,3 +5,9 @@ set -e
 . ./build
 
 build_plugin "woocommercev5" "wp-content/plugins/indodana-payment/library/Indodana/Payment"
+
+TARGET_DIR=".build/woocommercev5"
+mkdir $TARGET_DIR/temp
+cp -Lr $TARGET_DIR/plugin/wp-content/plugins/indodana-payment/* $TARGET_DIR/temp
+rm -rf $TARGET_DIR/plugin
+mv $TARGET_DIR/temp $TARGET_DIR/plugin
