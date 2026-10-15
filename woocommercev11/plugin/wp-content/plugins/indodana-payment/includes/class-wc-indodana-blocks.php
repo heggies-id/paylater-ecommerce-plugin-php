@@ -2,6 +2,7 @@
 
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 use IndodanaCommon\IndodanaConstant;
+use IndodanaCommon\IndodanaLogger;
 
 /**
  * Registers Indodana as a payment method for the Cart & Checkout blocks.
@@ -31,9 +32,11 @@ final class WC_Indodana_Blocks extends AbstractPaymentMethodType
       'wc-indodana-blocks',
       plugins_url('assets/js/indodana-blocks.js', INDODANA_PLUGIN_FILE),
       [ 'wc-blocks-registry', 'wc-settings', 'wp-element', 'wp-html-entities', 'wp-i18n' ],
-      null,
+      filemtime(plugin_dir_path(INDODANA_PLUGIN_FILE) . 'assets/js/indodana-blocks.js'),
       true
     );
+
+    wp_set_script_translations('wc-indodana-blocks', 'indodana-blocks');
 
     return [ 'wc-indodana-blocks' ];
   }
@@ -73,6 +76,11 @@ final class WC_Indodana_Blocks extends AbstractPaymentMethodType
     try {
       return $gateway->getInstallmentOptionsForCart($cart);
     } catch (\Throwable $exception) {
+      IndodanaLogger::error(sprintf(
+        '[Woocommerce-Blocks-get_installment_options] Failed to get installment options: %s',
+        $exception->getMessage()
+      ));
+
       return [];
     }
   }

@@ -30,7 +30,7 @@
    - Database username: `woocommercev11`
    - Database password: `woocommercev11`
 
-8. Copy `wp-config.php` on the running site to `woocommerce/upload` by running:
+8. Copy `wp-config.php` on the running site to `woocommercev11/upload` by running:
 
    ```bash
    $ cp .build/woocommercev11/upload/wp-config.php woocommercev11/upload/wp-config.php

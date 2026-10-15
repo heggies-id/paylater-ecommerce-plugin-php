@@ -45,6 +45,14 @@
       return unsubscribe;
     }, [ selected, emitResponse, eventRegistration ] );
 
+    if ( installmentOptions.length === 0 ) {
+      return el(
+        'div',
+        { className: 'wc-indodana-blocks-content' },
+        __( 'Indodana installment options are currently unavailable. Please choose another payment method.', 'indodana-blocks' )
+      );
+    }
+
     return el(
       'div',
       { className: 'wc-indodana-blocks-content' },
@@ -78,7 +86,7 @@
     label: label,
     ariaLabel: label,
     canMakePayment: function() {
-      return true;
+      return ( settings.installmentOptions || [] ).length > 0;
     },
     content: el( Content ),
     edit: el( Edit ),

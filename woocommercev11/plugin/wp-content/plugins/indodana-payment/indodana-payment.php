@@ -12,8 +12,6 @@
  * WC tested up to: 11.2
  */
 
-use IndodanaCommon\IndodanaConstant;
-
 define('INDODANA_PLUGIN_FILE', __FILE__);
 
 add_filter( 'woocommerce_payment_gateways', 'indodana_add_payment_gateway_class' );
